@@ -30,7 +30,7 @@ class RAGClient:
             chat_history = self.chat.get_chat_history()
         print(f'Chat History: {truncate_text(chat_history, 100)}')
         query = self.coreference_resolution.coreference_resolution(query, chat_history)
-        logging.info(f'Coreference Resolution: {query}')
+        print(f'Coreference Resolution: {query}')
         rag_fusion = self.query_fusion.fuse(query)
         logging.info(f'Query Fusion: {rag_fusion}')
         queries = []
@@ -61,12 +61,12 @@ class RAGClient:
             hits = self.rerank(rewritten_query, hits)
             logging.info(f'Reranked Hits: {hits[:3]}')
             aggregated_hits.extend(hits[:3])
-        return self.aggregate.aggregate(query, aggregated_hits)
+        return self.aggregate.aggregate(query, aggregated_hits[:5])
     
     def answer(self, query: str) -> str:
         # Context Augment
         context_augment = self.context_augment(query)
-
+        print(f'Context Augmented: {context_augment}')
         # Answer the query
         return self.chat.chat(query)
 

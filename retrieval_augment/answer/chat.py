@@ -14,7 +14,7 @@ class Chat:
         # Create a chatbot with the client
         response = self.client.chat(
             messages=[
-                {"role": "system", "content": "你是一个智能AI助手，专注于回答用户问题。"},
+                {"role": "system", "content": "你是一个智能助手，用户已提供关于问题的信息，请根据这些信息回答用户问题。并提供信息来源。"},
                 # Add the chat history
                 *self.chat_history,
                 {"role": "user", "content": query},
