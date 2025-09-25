@@ -61,14 +61,14 @@ class RAGClient:
             hits = self.rerank(rewritten_query, hits)
             logging.info(f'Reranked Hits: {hits[:3]}')
             aggregated_hits.extend(hits[:3])
-        return self.aggregate.aggregate(query, aggregated_hits[:5])
+        return self.aggregate.aggregate(query, aggregated_hits[:3])
     
     def answer(self, query: str) -> str:
         # Context Augment
         context_augment = self.context_augment(query)
         print(f'Context Augmented: {context_augment}')
         # Answer the query
-        return self.chat.chat(query)
+        return self.chat.chat(context_augment)
 
     def rag_chat(self):
         query = ""

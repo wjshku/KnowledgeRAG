@@ -25,10 +25,10 @@ class Aggregate:
         ```
         The query is: 中国有哪些主要城市
         The most relevant documents are:
-        中国主要城市有上海，北京，广州，深圳。（Source: http://www.baidu.com/中国城市/）
+        中国主要城市有上海，北京，广州，深圳。（Source: data/中国城市.md）
         美国主要城市有纽约，洛杉矶，芝加哥。（Source: http://www.baidu.com/美国城市/）
         ```
-        The answer is: 中国主要城市有上海，北京，广州，深圳。(Source: http://www.baidu.com/中国城市/)
+        The answer is: 中国主要城市有上海，北京，广州，深圳。(Source: data/中国城市.md)
         ```
         You are an AI assistant. Answer the question strictly based on the information provided below. 
         Do NOT use any knowledge not included in these sources. 
