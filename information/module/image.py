@@ -8,15 +8,11 @@ import time
 import traceback
 import re
 from typing import List, Dict, Optional
-from ..utils.pdf_utils import _build_chapter_map
+from utils.pdf_utils import _build_chapter_map
 import fitz  # PyMuPDF
 from PIL import Image
-try:
-    import pytesseract  # Optional OCR
-except Exception:
-    pytesseract = None  # Graceful fallback if not installed
-
 from openai import OpenAI
+from utils.client import OpenAIClient
 
 # Base URL for local/remote vision model API
 IMAGE_MODEL_URL = os.getenv("IMAGE_MODEL_URL", "http://localhost:8000/v1")
@@ -133,39 +129,28 @@ class ImageProcessor:
 
         prompt_text = "详细地描述这张图片的内容，不要漏掉细节，并提取图片中的文字。注意只需客观说明图片内容，无需进行任何评价。"
         # Call OpenAI-like client with retries
-        client = OpenAI(api_key='YOUR_API_KEY', base_url=IMAGE_MODEL_URL)
-        max_retries = 5
-        backoff = 1.0
+        client = OpenAIClient(model="internvl-internlm2", api_key='API_KEY', base_url=IMAGE_MODEL_URL)
         summary_text: Optional[str] = None
 
-        for attempt in range(max_retries):
-            try:
-                resp = client.chat.completions.create(
-                    model="internvl-internlm2",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {"type": "text", "text": prompt_text},
-                                {"type": "image_url", "image_url": {"url": data_url}},
-                            ],
-                        }
-                    ],
-                    temperature=0.2,
-                    top_p=0.95,
-                    max_tokens=2048,
-                    stream=False,
-                )
-                summary_text = resp.choices[0].message.content if getattr(resp, "choices", None) else None
-                break
-            except Exception:
-                logging.error(traceback.format_exc())
-                return 'This is an interesting image (fallback)'
+        summary_text = client.chat(
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": prompt_text},
+                    {"type": "image_url", "image_url": {"url": data_url}},
+                ],
+            }
+        ],
+        temperature=0.2,
+        top_p=0.95,
+        max_tokens=2048,
+        stream=False,
+        )
 
         return summary_text
 
     def context_augment(self, image_description: str, context: str) -> str:
-
         prompt = f'''
         目标：通过图片的上下文以及来源文件信息补充图片描述的细节，准确描述出图片在文档中的实际内容和用途含义。
 
@@ -196,32 +181,14 @@ class ImageProcessor:
         {context}
         ```
         '''
-        client = OpenAI(api_key='YOUR_API_KEY', base_url=IMAGE_MODEL_URL)
-        max_retries = 1
-        backoff = 1.0
-        context_augmented: Optional[str] = None
-
-        for attempt in range(max_retries):
-            try:
-                resp = client.chat.completions.create(
-                    model="internvl-internlm2",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {"type": "text", "text": prompt},
-                            ],
-                        }
-                    ],
-                )
-                context_augmented = resp.choices[0].message.content if getattr(resp, "choices", None) else None
-                return context_augmented
-            except Exception:
-                logging.error(traceback.format_exc())
-                image_description = image_description or ""
-                context = context or ""
-                # Simple concatenation to provide augmented context without extra API calls
-                return (image_description + "\n\n" + context).strip()   
+        client = OpenAIClient()
+        result = client.chat(
+            messages=[
+                {"role": "system", "content": "你是一个智能AI助手，根据图片的上下文对图片描述进行补充，补充后的描述要更加准确，更加详细，更加完整。"},
+                {"role": "user", "content": prompt},
+            ]
+        )
+        return result
 
     def get_metadata(self, dict_data: dict) -> dict:
         return {
@@ -240,34 +207,31 @@ class ImageProcessor:
     def process(self, info_path: str) -> list[dict]:
         # Read image from PDF and output image chunks (context augmented), with metadata
         # If a PDF is provided, extract images and return their metadata
-        try:
-            image_results = extract_and_save_images(info_path, min_width=200, min_height=200)
-            '''
-            image_result = {
-            "image_path": full_path,
-            "file_name": filename,
-            "page_number": page_number,
-            "img_index": img_idx_on_page,
-            "width": int(width),
-            "height": int(height),
-            "source_pdf": pdf_path,
-            "page_text": page.get_text()
+        image_results = extract_and_save_images(info_path, min_width=200, min_height=200)
+        '''
+        image_result = {
+        "image_path": full_path,
+        "file_name": filename,
+        "page_number": page_number,
+        "img_index": img_idx_on_page,
+        "width": int(width),
+        "height": int(height),
+        "source_pdf": pdf_path,
+        "page_text": page.get_text()
+        }
+        '''
+        chunks: List[Dict[str]] = []
+        for image_result in image_results:
+            image_path = image_result["image_path"]
+            image_description = self.summarize_image(image_path)
+            print(f'Image Description: {image_description}')
+            image_result["image_description"] = image_description
+            context_aug_content = self.context_augment(image_description, image_result["page_text"])
+            print(f'Context Augmented Content: {context_aug_content}')
+            metadata = self.get_metadata(image_result)
+            chunk = {
+                "content": context_aug_content,
+                "metadata": metadata,
             }
-            '''
-            chunks: List[Dict[str, Any]] = []
-            for image_result in image_results:
-                image_path = image_result["image_path"]
-                image_description = self.summarize_image(image_path)
-                image_result["image_description"] = image_description
-                context_aug_content = self.context_augment(image_description, image_result["page_text"])
-                metadata = self.get_metadata(image_result)
-                chunk = {
-                    "content": context_aug_content,
-                    "metadata": metadata,
-                }
-                chunks.append(chunk)
-            return chunks
-                
-        except Exception as e:
-            logging.error(e)
-            return []
+            chunks.append(chunk)
+        return chunks

@@ -3,9 +3,10 @@ from .basic import index_exists, create_index, delete_index, write_data, list_in
 from .query import submit_query
 
 class ElasticSearchClient:
-    def __init__(self, elasticurl: str, username: str, password: str):
+    def __init__(self, elasticurl: str, username: str, password: str, index_name: str):
         self.client = Elasticsearch([elasticurl],
                             basic_auth=(username, password))
+        self.index_name = index_name
 
     def list_indices(self):
         return list_indices(self.client)
@@ -22,5 +23,7 @@ class ElasticSearchClient:
     def write_data(self, index_name: str, data: dict):
         return write_data(self.client, index_name, data)
 
-    def submit_query(self, index_name: str, query: str, query_type: str):
+    def submit_query(self, query: str, query_type: str, index_name: str = None):
+        if index_name is None:
+            index_name = self.index_name
         return submit_query(self.client, index_name, query, query_type)

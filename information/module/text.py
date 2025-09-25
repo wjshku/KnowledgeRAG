@@ -7,17 +7,13 @@ from typing import List, Dict, Any
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyMuPDFLoader
 import fitz  # PyMuPDF
-from ..utils.pdf_utils import _build_chapter_map
+from utils.pdf_utils import _build_chapter_map
 
 def num_tokens_from_string(string: str) -> int:
     import tiktoken
     encoding = tiktoken.get_encoding("cl100k_base")
     num_tokens = len(encoding.encode(string))
     return num_tokens
-
-
-
-
 
 class TextProcessor:
     def __init__(self, chunk_size: int = 1024, chunk_overlap: int = 100):

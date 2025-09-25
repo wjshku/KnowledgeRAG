@@ -33,5 +33,16 @@ class InformationProcessor:
 
     def get_info_chunks(self) -> list[dict]:
         for name, processor in self.prosessors.items():
-            for info_chunk in processor.get_info_chunks():
+            for name, info_chunk in processor.get_info_chunks():
                 yield name, info_chunk
+
+    def get_info_chunks_by_batch(self, batch_size: int = 100) -> list[dict]:
+        batch = []
+        for i, chunk in enumerate(self.get_info_chunks()): 
+            batch.append(chunk)
+
+            if len(batch) == batch_size: 
+                yield batch
+                batch = []
+        if batch:
+            yield batch

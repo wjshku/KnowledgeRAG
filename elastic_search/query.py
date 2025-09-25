@@ -1,41 +1,49 @@
 # Query operations for Elastic Search
 
 from elasticsearch import Elasticsearch
+from utils.embedding import get_embedding
+from utils.text import get_keyword
 
 def submit_query(client: Elasticsearch, index_name: str, query: str, query_type: str):
     if query_type == "keyword":
         # [assumed] Simple multi_match over common text fields
-        body = {
-            "query": {
-                "multi_match": {
-                    "query": query,
-                    "fields": ["title^2", "content", "text", "body"],
-                    "type": "best_fields"
-                }
+        keywords = get_keyword(query)
+        keyword_query = {
+            "bool": {
+                "should": [
+                    {"match": {"text": {"query": keyword, "fuzziness": "AUTO"}}} for keyword in keywords
+                ],
+                "minimum_should_match": 1
             }
         }
-        return client.search(index=index_name, body=body)
+        
+        result = client.search(index=index_name, query=keyword_query)
+        
     elif query_type == "vector":
-        # [assumed] Expect `query` to be a JSON-encoded list of floats (embedding)
-        # If not JSON, try to parse comma-separated floats
-        import json
-        if isinstance(query, str):
-            try:
-                vector = json.loads(query)
-            except Exception:
-                vector = [float(x) for x in query.split(",") if x.strip()]
-        else:
-            vector = query  # [assumed] already a list
-
-        # [assumed] Use kNN query on field "embedding"
-        body = {
-            "knn": {
-                "field": "embedding",
-                "query_vector": vector,
-                "k": 10,
-                "num_candidates": 100
+        embedding = get_embedding([query])
+        vector_query = {
+            "bool": {
+                "must": [{"match_all": {}}],
+                "should": [
+                    {"script_score": {
+                        "query": {"match_all": {}},
+                        "script": {
+                            "source": "cosineSimilarity(params.queryVector, 'vector') + 1.0",
+                            "params": {"queryVector": embedding[0]}
+                        }
+                    }}
+                ]
             }
         }
-        return client.search(index=index_name, body=body)
+        result = client.search(index=index_name, query=vector_query)
+
     else:
         raise ValueError(f"Invalid query type: {query_type}")
+    
+    hits = [{
+            'id': hit['_id'], 'text': hit['_source'].get('text'), 
+            'metadata':hit['_source'].get('metadata'),
+            'rank': idx + 1} 
+            for idx, hit in enumerate(result['hits']['hits'])]
+    
+    return hits
