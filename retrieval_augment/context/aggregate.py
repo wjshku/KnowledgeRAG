@@ -7,7 +7,7 @@ class Aggregate:
     def aggregate(self, query: str, hits: list):
         # Aggregate the retrieved results after reranking. Create a new context for the query
         # Create the documents text with newlines
-        documents_text = '\n'.join([hit['text'] + ' (Source: ' + hit['metadata']['source'] + ')' for hit in hits])
+        documents_text = '\n'.join([hit['text'] + ' (Source: ' + hit['metadata']['source'] + 'Page: ' + hit['metadata']['page'] + ')' for hit in hits])
         
         prompt = f"""
         You are a helpful assistant to answer question
@@ -25,10 +25,10 @@ class Aggregate:
         ```
         The query is: 中国有哪些主要城市
         The most relevant documents are:
-        中国主要城市有上海，北京，广州，深圳。（Source: data/中国城市.md）
+        中国主要城市有上海，北京，广州，深圳。（Source: data/中国城市.md, Page: 1）
         美国主要城市有纽约，洛杉矶，芝加哥。（Source: http://www.baidu.com/美国城市/）
         ```
-        The answer is: 中国主要城市有上海，北京，广州，深圳。(Source: data/中国城市.md)
+        The answer is: 中国主要城市有上海，北京，广州，深圳。(Source: data/中国城市.md, Page: 1)
         ```
         You are an AI assistant. Answer the question strictly based on the information provided below. 
         Do NOT use any knowledge not included in these sources. 
