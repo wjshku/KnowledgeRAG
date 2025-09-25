@@ -1,0 +1,5 @@
+.cursor
+.env.development
+.DS_Store
+data
+*/__pycache__
