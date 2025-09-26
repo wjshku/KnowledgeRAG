@@ -1,0 +1,428 @@
+(genai) wjs@Junshis-MacBook-Pro-2 MultiModal_RAG % python main.py
+Model: gpt-5-nano
+User: 谷歌的广告机制为何被看作是黑箱?
+Original Query: 谷歌的广告机制为何被看作是黑箱?
+Chat History: 
+Model: gpt-5-nano
+Coreference Resolution: ['谷歌的广告机制为何被看作是黑箱?']
+Model: gpt-5-nano
+Model: gpt-5-nano
+Model: gpt-5-nano
+Rewritten Queries: ['谷歌广告机制为何被认为是黑箱？有哪些争议点和证据？', '谷歌广告拍卖的竞价机制是如何运作的？涉及哪些出价、预算、质量分数等要素？', '谷歌广告的排名是如何确定的？影响排名的主要因素有哪些？', '谷歌广告的分配/展示过程是如何执行的？如何决定广告的展示位置和时长？', '在竞价、排名和分配过程中存在哪些不透明环节？为何会被称为不透明？有哪些公开信息或研究指出这些点？', '谷歌广告系统公开了哪些信息？', '监管机构对谷歌广告系统透明度的评价有哪些？', '独立研究者对谷歌广告系统透明度的评价与争议有哪些？']
+Context Augmented: 
+        You are a helpful assistant to answer question
+        The query is: 谷歌的广告机制为何被看作是黑箱?
+        The most relevant documents are:
+        castle.”
+One aspect of AdSense was reminiscent of the black box that determined
+the ad quality rating of AdWords. When someone clicked on an AdSense ad, the
+money paid by the advertiser was split between Google and the publisher whose
+site hosted the ad. According to Rajaram, the original thought was to split the
+money down the middle—Google would take half and the AdSense publisher
+would take the other half. But Brin thought that such a split gave too much to
+Google. The idea was to build the program for the long run, and if Google made
+it clear that it was taking half the money, a competitor might undercut the
+program by giving 80 or even 90 percent of the fee to the publisher. So Google
+decided to give the majority of the money to the publisher. Then Susan Wojcicki
+came up with an idea that some might find strange: What if we don’t reveal the
+revenue share percentage with the publisher? That way Google wouldn’t have to
+worry about a competitor boasting a better split.
+Gokul Rajaram was startled by the idea. “What?” he said. “How can we not
+tell the publishers what percentage of the revenue they get?”
+“The publishers shouldn’t care about the revenue share,” Wojcicki told him.
+“What they should care about is the bottom line.”
+On the face of it, the scheme flew in the face of Google’s stated goal of
+transparency. But when Google decided that it was in its interest to keep
+something secret—as the “hiding strategy” showed—it reconsidered. The
+dichotomy of closed and open at Google might be traced to Larry Page’s
+personal library. On one hand there was Don Norman’s book, a polemic urging
+total fealty to the user, making everything clear to customers and visitors to a
+site. On the other hand, there was Nikola Tesla, exploited and dying alone in a
+New York City hotel. With regard to the revenue split in AdSense, Google
+wasn’t going to be Tesla. Besides, why would publishers complain if Google
+made them more money than the competitors?
+“It was one of the single biggest painful things for me,” says Rajaram. “On
+every panel I went to for the first year, I would get questions about why isn’t
+Google sharing the revenue split and why isn’t Google being transparent. People
+said we were doing it because we weren’t generous. But quite to the contrary, we
+were being generous. We just didn’t want our competitors to tell publishers that
+they were offering a better revenue share.”
+(In May 2010, Google finally revealed the split. “In the spirit of greater
+transparency,” Google reported that of the money received from advertisers on
+AdSense for content, 68 percent went to the publishers whose pages hosted the
+ads. Google kept the other 32 percent. That was close to the proportions that
+participants and analysts had long assumed. Google’s belated announcement (Source: data/pdf/In The Plex (Google).pdfPage: 115)
+can’t easily explain it to advertisers.” On the other hand, he adds, “It actually
+turns into a fun mathematical problem, which I loved.”
+From the start, Page and Brin had an idealistic view that Google would run
+ads only if users deemed them a useful feature. Using mathematical wizardry,
+Veach and Kamangar had come up with a mechanism to realize that fantastic
+aspiration. Google’s original system asked advertisers to pay a fixed rate to
+expose their ads on a results page triggered by targeted keywords. The new
+system asked advertisers to participate in an auction that determined how much
+they would pay every time someone clicked on the targeted ad. What’s more, by
+rewarding better ads the new system made users happier by increasing the odds
+that what appeared on the page was relevant to their queries. The system
+enforced Google’s insistence that advertising shouldn’t be a transaction between
+publisher and advertiser but a three-way relationship that also included the user.
+But would it work? For one thing, executing the system was a huge
+technological challenge. Every AdWords Select ad would be the winner of a
+unique auction requiring the execution of a complicated formula. The auction
+would be conducted in stealth, generated the instant someone typed a keyword
+into the Google search box, with the result shown in a fraction of a second. “I
+don’t know the number of auctions that we run per day, but for purposes of
+argument, use a billion or a hundred million,” says Schmidt. “We run many more
+auctions than anyone else on the planet because we run them in real time, we run
+one auction per ad per page, and that’s multiplied by the numbers of ads per
+page. It’s a phenomenal number. Technologically, because of latency, you have
+to do this very, very quickly.” Fortunately for Google, even in 2002, when the
+new system was completed, the company was fanatically focused on huge
+computational feats performed at dizzying speed on a platform of thousands of
+computers, so it was able to leap the technology hurdle.
+The dicier challenge was getting skeptical customers of the original
+AdWords to leave a system they were happy with to try this complicated new
+one. On January 24, 2002, Google tested AdWords Select by offering it to
+selected advertisers. In order to lure them to the new program, Google stacked
+the deck: it placed ads bought under the new AdWords Select system in more
+favorable positions than the advertisers had actually paid for. “The old AdWords
+customers would say, ‘How do we get to position one?’ And we’d say, ‘Oh, you
+sign up to this system over here.’ They were signing up in droves, so it really
+simplified our lives,” says Veach. Spurred by the initial returns from higher
+positions, advertisers began spending more money in the new system—and
+getting clearly better returns. Within a month, Google simply pulled the plug on
+the old CPM system and sent all its advertisers an email informing them of the (Source: data/pdf/In The Plex (Google).pdfPage: 102)
+advertising—found itself locked into the model that had initially brought it
+success. Google innovated circles around Overture, focusing on its core
+obsessions of speed and scale. Overture required its advertisers to pick specific
+keywords; Google would match an ad to many keywords, some of them with
+subtle connections discovered by analysis of the behavior of its millions of users.
+Overture concentrated on high-value accounts that it sold by hand. Google built
+a self-service system that allowed it to accommodate hundreds of thousands of
+advertisers. Overture did implement some of Google’s innovations, such as the
+second-price auction. But by then AdWords had left Overture and Yahoo in the
+dust.
+(Bill Gross would later shrug off the fact that his ideas involving pay per
+click and ad auctions had made billionaires at Google but not at Idealab. “I feel
+we won,” he says. “There was the satisfaction of breaking the code. We
+originally invested $200,000 in GoTo, and when we sold Overture, we made
+$200 million. That was a pretty great return. And we learned our lessons about
+patent protection.”)
+AdWords Select rolled out in February 2002. The AOL deal went into effect
+in May. Suddenly, Google’s financial crisis was over. Now Google had a cash
+cow that would fund the next decade’s worth of projects, from brilliant to
+lunatic. In 2007, writing about the “spectacular commercial success” of the
+second-price auction model, economists at Stanford, Harvard, and the University
+of California at Berkeley described it as “the dominant transaction mechanism in
+a large and rapidly growing industry.”
+Before AdWords Select and the AOL deal, Eric Schmidt often passed by
+Sheryl Sandberg’s cubicle and asked her how many advertisers Google had.
+“Not many,” she would say. Later in the day, he’d ask her the same question.
+“Eric,” she’d say, “not many more than we had three hours ago.” In 2002, all that
+changed. AdWords Select was drawing new advertisers to the Internet, and the
+AOL partnership was pulling in ones that had resisted Google. “So we just
+started growing,” says Sandberg. “It went unbelievably well. And nobody knew
+just how well until the IPO.” (Source: data/pdf/In The Plex (Google).pdfPage: 108)
+created a “black box” in which advertisers could never understand, or trust, the
+calculations that Google made to place their ads.
+Here was the rub: The bids submitted by contenders for the ad slots were
+only half of what ultimately determined the winners of the auction. The other
+half was the quality score. This metric would assure that the ads Google showed
+on its results page were helpful to its users—a high quality score meant that the
+ad was relevant to the user’s quest. Low quality scores were for ads that were
+irrelevant, misleading, or even spamlike. In the early version of AdWords, the
+sole determinant of the quality score was Google’s guess at the percentage of
+times a user would click on an ad when it appeared on a results page—the click-
+through rate. Later Google used a more complicated formula to determine
+quality score by adding factors such as the relevance of the ad to the specific
+keyword and the quality of the landing page. But the biggest factor remained the
+predicted click-through rate.
+Say that Alice, Juan, and Ted are all bidding for the keyword “hand lotion.”
+Alice is selling an artisanal form of hand lotion popular in upscale spas. Juan
+owns a big drugstore that sells hand lotion, among many sundries. Ted has a
+travel site. He isn’t selling hand lotion at all but wants to expose his ad to the
+kind of person who buys hand lotion. Alice bids ten cents per click. Juan bids
+fifteen cents. Ted bids fifty cents. If you think that Ted’s high bid automatically
+puts him in the top position, you’re wrong. It’s quite possible that Alice, the low
+bidder, would get the favored spot. Google’s calculations might determine that
+users who click on her site are more likely to find what they want and thus
+assign her a very high quality score. Juan’s quality score would be downgraded
+—as would his effective bid—because users may go to his site and have
+difficulty finding hand lotion. He may be in position two, paying a little less than
+Alice. Ted would have an even lower quality score. People looking for hand
+lotion are unlikely to click on a travel ad. His bid would be downgraded even
+more. (He may even be required to pay a prohibitively high “minimum bid”—a
+practice that ultimately engendered a lot of grumbling among certain
+advertisers.)
+The beauty of the ad quality formula, says Sheryl Sandberg, is that “it made
+the advertiser do the work to be relevant. You paid less if your ads were more
+relevant. So you had a reason to work on your keyword, your text, your landing
+page, and generally improve your campaign.” There were some downsides,
+though. Chief among them was that the system was fairly complicated and
+risked befuddling an advertiser.
+Veach would acknowledge this. “It’s not so much that any of these ideas on
+their own are complicated,” he says. “But when you put the three together, you (Source: data/pdf/In The Plex (Google).pdfPage: 101)
+the fact that advertisers were bound to pay the amount they had bid, even if the
+next lowest bidder had offered significantly less. “That means that advertisers
+always have an incentive to lower their bids [in subsequent rounds],” he says.
+(This was known in the auction world as “bid shading.”) As an example, he
+would cite the case where an advertiser bid 50 cents and the next highest bidder
+offered only 40 cents. Clearly the high bidder would be unhappy, because the
+optimal bid was 41 cents, and the winner was stuck with paying nine cents too
+much. A cottage industry of software vendors had provided programs to
+automate bid shading on Overture, so winners would keep submitting slightly
+lower bids, and losers would edge up. “I wanted to avoid that cat-and-mouse
+game,” says Veach.
+So Veach devised a different model: the winner of the auction wouldn’t be
+charged for the amount of his victorious bid but instead would pay a penny more
+than the runner-up bid. (Example: If Joe bids 10 cents a click, Alice bids 6, and
+Sue bids 2, Joe wins the top slot and pays 7. Alice is in the next slot, paying 3.)
+It was incredibly liberating because it eliminated the fear of “winner’s remorse,”
+where the high bidder in an auction feels suckered by paying too much. In the
+Google model, no one would feel like an idiot for paying a dollar a click when
+the competitor below them bought a slot on the same page, positioned just a few
+pixels lower than their ad, for only 10 cents a click. In that case, a winner would
+get the prime position for 11 cents.
+Veach knew in his heart this was the right way to go, but he had to do a lot
+of explaining. “Larry and Sergey kept asking me if it wasn’t simpler to have an
+auction where we just have people pay what they bid,” he says. “And I kept
+saying, ‘No,’ because then people have this incentive to keep lowering their
+bids.”
+To run its ad operation, Google had hired Sheryl Sandberg, former chief of
+staff to the secretary of the treasury in the Clinton administration. She’d gotten
+to know Eric Schmidt when he visited D.C. to argue against Internet taxes.
+Though she’d never been involved in high tech—besides her Treasury post, her
+résumé included McKinsey & Company and the World Bank—she’d spent the
+past few years observing what was happening in Silicon Valley. Part of her job at
+Google was explaining its innovative auction. She kept staring at the formula,
+wondering why it seemed so familiar. So she called her former boss, Treasury
+Secretary Larry Summers.
+“Larry, we have this problem,” she said. “I’m trying to explain how our
+auction works—it seems familiar to me.” She described it to him.
+“Oh yeah,” said Summers. “That’s a Vickery second-bid auction!” He
+explained that not only was this a technique used by the government to sell (Source: data/pdf/In The Plex (Google).pdfPage: 99)
+Federal Reserve bonds but the economist who had devised it had won a Nobel
+Prize.
+Veach had reinvented it from scratch.
+One fan of Veach’s system was the top auction theorist, Stanford economist
+Paul Milgrom. “Overture’s auctions were much less successful,” says Milgrom.
+“In that world, you bid by the slot. If you wanted to be in third position, you put
+in a bid for third. If there’s an obvious guy to win the first position, nobody
+would bid against him, and he’d get it cheap. If you wanted to be in every
+position, you had to make bids for each of them. But Google simplified the
+auction. Instead of making eight bids for the eight positions, you made one
+single bid. The competition for second position will automatically raise the price
+for the first position. So the simplification thickens the market. The effect is that
+it guarantees that there’s competition for the top positions.”
+Veach and Kamangar’s implementation was so impressive that it changed
+even Milgrom’s way of thinking. “Once I saw this from Google, I began seeing
+it everywhere,” he says, citing examples in spectrum auctions, diamond markets,
+and the competition between Kenyan and Rwandan coffee beans. “I’ve begun to
+realize that Google somehow or other introduced a level of simplification to ad
+auctions that was not included before.” And it wasn’t just a theoretical advance.
+“Google immediately started getting higher prices for advertising than Overture
+was getting,” he notes.
+That wasn’t only because of the auction model; Veach and Kamangar had
+made other significant advances. One of the biggest was the adoption of the
+other Overture idea, pay per click. Google’s improved version of the original
+AdWords, called AdWords Select, would no longer charge per impression,
+according to how many people saw an ad. Instead, the click-through rate would
+become the measure of online advertising. The bids advertisers submitted would
+specify how much they were willing to pay each time a user clicked on the ad
+and was sent to the landing page on the advertiser’s website.
+The longtime joke in the marketing world was that only half of advertising
+is worth the money—but no one can tell which half. Google was switching the
+game: using its system, you would pay for ads only when they worked.
+That was not all. The ad model that Veach and Kamanger created had yet
+another major innovation, but this one was exclusively Google’s. It would
+become the least understood, most controversial, and ultimately most powerful
+component of AdWords Select: a built-in function to regulate ad quality. The
+new system instituted financial incentives for better ads. It lowered the price for
+effective ads and meted out monetary punishment and even an online ad version
+of the death penalty for bad ads. It also opened Google to the charge that it had (Source: data/pdf/In The Plex (Google).pdfPage: 100)
+created a “black box” in which advertisers could never understand, or trust, the
+calculations that Google made to place their ads.
+Here was the rub: The bids submitted by contenders for the ad slots were
+only half of what ultimately determined the winners of the auction. The other
+half was the quality score. This metric would assure that the ads Google showed
+on its results page were helpful to its users—a high quality score meant that the
+ad was relevant to the user’s quest. Low quality scores were for ads that were
+irrelevant, misleading, or even spamlike. In the early version of AdWords, the
+sole determinant of the quality score was Google’s guess at the percentage of
+times a user would click on an ad when it appeared on a results page—the click-
+through rate. Later Google used a more complicated formula to determine
+quality score by adding factors such as the relevance of the ad to the specific
+keyword and the quality of the landing page. But the biggest factor remained the
+predicted click-through rate.
+Say that Alice, Juan, and Ted are all bidding for the keyword “hand lotion.”
+Alice is selling an artisanal form of hand lotion popular in upscale spas. Juan
+owns a big drugstore that sells hand lotion, among many sundries. Ted has a
+travel site. He isn’t selling hand lotion at all but wants to expose his ad to the
+kind of person who buys hand lotion. Alice bids ten cents per click. Juan bids
+fifteen cents. Ted bids fifty cents. If you think that Ted’s high bid automatically
+puts him in the top position, you’re wrong. It’s quite possible that Alice, the low
+bidder, would get the favored spot. Google’s calculations might determine that
+users who click on her site are more likely to find what they want and thus
+assign her a very high quality score. Juan’s quality score would be downgraded
+—as would his effective bid—because users may go to his site and have
+difficulty finding hand lotion. He may be in position two, paying a little less than
+Alice. Ted would have an even lower quality score. People looking for hand
+lotion are unlikely to click on a travel ad. His bid would be downgraded even
+more. (He may even be required to pay a prohibitively high “minimum bid”—a
+practice that ultimately engendered a lot of grumbling among certain
+advertisers.)
+The beauty of the ad quality formula, says Sheryl Sandberg, is that “it made
+the advertiser do the work to be relevant. You paid less if your ads were more
+relevant. So you had a reason to work on your keyword, your text, your landing
+page, and generally improve your campaign.” There were some downsides,
+though. Chief among them was that the system was fairly complicated and
+risked befuddling an advertiser.
+Veach would acknowledge this. “It’s not so much that any of these ideas on
+their own are complicated,” he says. “But when you put the three together, you (Source: data/pdf/In The Plex (Google).pdfPage: 101)
+The policy reflected the different philosophy Google brought to advertising
+in general. Google ads were answers. They were solutions. “Ideally we wanted
+people to have a 50 to 100 percent click rate,” says Armstrong.
+Jeff Levick, whose job it was to gin up ads from companies servicing other
+businesses (B2B), would cold-call prospective advertisers. They would say,
+“What’s Google?” He would tell them about the searches conducted in Google
+and what keywords were already performing for advertisers. One sector ripe for
+this pitch was the box business—boxes for shipping, boxes stuffed with Bubble
+Wrap. So he called a company called Uline, which, like Levick, was based in
+Chicago. “Do you know that in the last twenty-four hours 1,500 people typed the
+word ‘boxes’ into the Google search engine?” he said to the guy in purchasing
+whom he finally managed to reach. “Would you like those people to come to
+your website?” Levick wound up doing a lot of business in boxes.
+With Premium Sunset the algorithm was displacing the handshake. The
+system itself would police ad quality by estimating the success of an ad and
+incorporating that into the bid price. And the sales force would have different
+kinds of interactions with clients. The old job was making a sale. Their new job
+would be … getting the big companies they dealt with to place bids in an
+auction? “We thought it was a little half cocked,” says Jeff Levick. “If we let the
+auction set prices, we worried that we could actually lose a lot of money.”
+But the die was cast. Tim Armstrong, the executive in the New York office
+in charge of sales, gave his people an upbeat description of the system. Schmidt
+came to New York to assure them that it was the right move. “People were
+extremely upset, because this was a material change in the way they were doing
+business,” Schmidt would later recall. Ultimately, since the engineers in
+Mountain View had made good on their promises so far, the salespeople trusted
+them on this one. They weren’t going to be replaced. They were going to assume
+a new role as mediators between advertisers and algorithms.
+“Our group’s job was to build the largest bridge we could between Silicon
+Valley and Madison Avenue,” says Armstrong. “It was really bringing science to
+the art of advertising and being able to scale the art of advertising through
+science.”
+For Jeff Levick the big test came in his favorite product category—the
+boxes. Box firms had become some of the biggest advertisers at Google, and he
+spent a lot of time on the road seeing them, one in Southern California, one in
+Boston, and one nearby in Chicago. All were seeing an excellent return in their
+investments in Premium. Now Levick would explain that Google was pulling the
+plug on Premium and they were now going to have to participate in a high-stakes
+version of eBay. “The guy in California literally almost threw us out of his office (Source: data/pdf/In The Plex (Google).pdfPage: 121)
+can’t easily explain it to advertisers.” On the other hand, he adds, “It actually
+turns into a fun mathematical problem, which I loved.”
+From the start, Page and Brin had an idealistic view that Google would run
+ads only if users deemed them a useful feature. Using mathematical wizardry,
+Veach and Kamangar had come up with a mechanism to realize that fantastic
+aspiration. Google’s original system asked advertisers to pay a fixed rate to
+expose their ads on a results page triggered by targeted keywords. The new
+system asked advertisers to participate in an auction that determined how much
+they would pay every time someone clicked on the targeted ad. What’s more, by
+rewarding better ads the new system made users happier by increasing the odds
+that what appeared on the page was relevant to their queries. The system
+enforced Google’s insistence that advertising shouldn’t be a transaction between
+publisher and advertiser but a three-way relationship that also included the user.
+But would it work? For one thing, executing the system was a huge
+technological challenge. Every AdWords Select ad would be the winner of a
+unique auction requiring the execution of a complicated formula. The auction
+would be conducted in stealth, generated the instant someone typed a keyword
+into the Google search box, with the result shown in a fraction of a second. “I
+don’t know the number of auctions that we run per day, but for purposes of
+argument, use a billion or a hundred million,” says Schmidt. “We run many more
+auctions than anyone else on the planet because we run them in real time, we run
+one auction per ad per page, and that’s multiplied by the numbers of ads per
+page. It’s a phenomenal number. Technologically, because of latency, you have
+to do this very, very quickly.” Fortunately for Google, even in 2002, when the
+new system was completed, the company was fanatically focused on huge
+computational feats performed at dizzying speed on a platform of thousands of
+computers, so it was able to leap the technology hurdle.
+The dicier challenge was getting skeptical customers of the original
+AdWords to leave a system they were happy with to try this complicated new
+one. On January 24, 2002, Google tested AdWords Select by offering it to
+selected advertisers. In order to lure them to the new program, Google stacked
+the deck: it placed ads bought under the new AdWords Select system in more
+favorable positions than the advertisers had actually paid for. “The old AdWords
+customers would say, ‘How do we get to position one?’ And we’d say, ‘Oh, you
+sign up to this system over here.’ They were signing up in droves, so it really
+simplified our lives,” says Veach. Spurred by the initial returns from higher
+positions, advertisers began spending more money in the new system—and
+getting clearly better returns. Within a month, Google simply pulled the plug on
+the old CPM system and sent all its advertisers an email informing them of the (Source: data/pdf/In The Plex (Google).pdfPage: 102)
+long tail is the term used to refer to smaller, geographically disparate businesses
+and interests. The Internet—particularly with the help of a search engine like
+Google—made long-tail enterprises easy to reach.) If you made the system self-
+service, you could handle thousands of small advertisers, and the overhead
+would be so low that customers could buy ads very cheaply. So in October 2000
+Google launched a product catering to smaller operations that had not previously
+contemplated an online buy. (Armstrong’s team kept selling premium sponsored
+links to big advertisers.)
+Google named the self-service system “AdWords.” It was a do-it-yourself
+marketplace for keywords, purchased by credit card. When someone came to
+Google and searched using one of those keywords, a few words of text with a
+link to the advertiser’s home page would appear. The ad would be very similar to
+a search result, only paid for. Those ads ran to the right of the search results, as
+suggested by an adviser to Google, the Israeli high-tech investor Yossi Vardi. If
+you drew a vertical line two-thirds of the way across the page and put text ads to
+the right, he told Brin one day, it would be clear which were the real algorithm-
+discovered search results—known as “organic” results—and which were paid
+links. Google also made sure to label the ads “sponsored links” to further
+distinguish them from the purity of its organic search results.
+AdWords prices were fixed according to the position on the page an ad
+would occupy. If it was in the most desirable position, the top ad on the right, the
+client would pay $15 per thousand exposures. The second position cost $12, the
+third $10. There was one feature built in to try to ensure that the most useful ads
+would appear: advertisers couldn’t pay their way to secure the best positions.
+Instead, the more successful ones—the ones that lured the most people to click
+on them and go to the advertiser’s landing page—would get priority. The
+percentage of people exposed to ads who responded to them became known as
+the click-through rate.
+This was Google’s first stab at what became known as ad quality. It would
+become a vital component of the company’s strategy, which viewed the ad
+system as a virtuous triangle with three happy parties: Google, the advertiser,
+and especially the user. Unwanted ads made unhappy customers, so Google
+made it a high priority to calibrate the system to drive out ads that were
+irrelevant or annoying.
+One day in October 2000 the engineers who coded the system tested
+AdWords with a little text ad of their own that read, “Have a credit card and 5
+minutes? Get your ad on Google today.” It was shown to only a small number of
+users. Within minutes, someone had clicked on it and began filling out the form.
+And barely a half an hour after that, someone who typed in the words “Live (Source: data/pdf/In The Plex (Google).pdfPage: 95)
+        Please answer the query based on the information retrieved and provide reference to the source documents.
+        Examples:
+        ```
+        The query is: 孙悟空和猪八戒的关系
+        The most relevant documents are:
+        孙悟空和猪八戒是师兄弟关系，是西游记中的两个角色。（Source: http://www.baidu.com/西游记/）
+        ```
+        The answer is: 孙悟空和猪八戒是师兄弟关系。(Source: http://www.baidu.com/西游记/)
+        ```
+        The query is: 中国有哪些主要城市
+        The most relevant documents are:
+        中国主要城市有上海，北京，广州，深圳。（Source: data/中国城市.md, Page: 1）
+        美国主要城市有纽约，洛杉矶，芝加哥。（Source: http://www.baidu.com/美国城市/）
+        ```
+        The answer is: 中国主要城市有上海，北京，广州，深圳。(Source: data/中国城市.md, Page: 1)
+        ```
+        You are an AI assistant. Answer the question strictly based on the information provided below. 
+        Do NOT use any knowledge not included in these sources. 
+        If the answer cannot be found in the provided text, respond with: "The information is not available in the provided context."
+        Very important: Always provide source information in the answer.
+        
+Chat History Length: 2
+RAG Assistant:  原因是谷歌广告的排序与定价依赖于一个内部、对外不透明的算法，而广告主无法理解其中的具体运作。
+
+要点如下：
+- 广告排名不仅取决于出价，还由一个质量分数（quality score）等“隐藏”因素共同决定。出价只是“半数”影响因素，另一半来自内部的质量评估（包括对广告相关性、着陆页质量、潜在点击率等的预测）。这使得广告主很难理解为什么某些广告会获得特定位置或价格。（Source: data/pdf/In The Plex (Google).pdfPage: 99-101）
+- 该系统在实时拍卖中计算广告位，过程和具体公式对外不透明，形成了一个“黑箱”， advertisers 甚至无法信任其计算过程。（Source: data/pdf/In The Plex (Google).pdfPage: 101-102）
+- 文献中直接描述该现象为“created a ‘black box’ in which advertisers could never understand, or trust, the calculations that Google made to place their ads.”（Source: data/pdf/In The Plex (Google).pdfPage: 100-101）
+
+因此，谷歌广告机制被视作黑箱，核心在于其内部的、对外不可见的排序与定价算法，以及将出价与质量评分结合在一个复杂的实时拍卖中运作的特性。（Source: data/pdf/In The Plex (Google).pdfPage: 99-102）
+User: 

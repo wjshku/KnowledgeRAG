@@ -27,9 +27,10 @@ def test_elastic():
 def test_processor():
     info_client = InformationProcessor()
     info_paths = [
-                "data/pdf/table_extraction_example.pdf", 
-                "data/pdf/image_extraction_example.pdf", 
-                "data/pdf/刑事诉讼法.pdf"
+                # "data/pdf/table_extraction_example.pdf", 
+                # "data/pdf/image_extraction_example.pdf", 
+                # "data/pdf/刑事诉讼法.pdf",
+                "data/pdf/In The Plex (Google).pdf"
                 ]
     info_type = info_client.which_info_type(info_paths[0])
     print('info_type:', info_type)

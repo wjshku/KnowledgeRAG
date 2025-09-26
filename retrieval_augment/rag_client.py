@@ -26,18 +26,23 @@ class RAGClient:
         
     def rewrite(self, query: str, chat_history: str = None) -> str:
         # Rewrite the query: Coreference Resolution -> Fusion -> Decomposition
+        
+        print(f'Original Query: {query}')
         if chat_history is None:
             chat_history = self.chat.get_chat_history()
         print(f'Chat History: {truncate_text(chat_history, 100)}')
         query = self.coreference_resolution.coreference_resolution(query, chat_history)
-        print(f'Coreference Resolution: {query}')
+        print(f'Coreference Resolution: {query[0]}')
         rag_fusion = self.query_fusion.fuse(query)
-        logging.info(f'Query Fusion: {rag_fusion}')
+        print(f'Query Fusion and Decomposition:')            
+        
         queries = []
-        for q in rag_fusion:
+        for idx, q in enumerate(rag_fusion):
             qs = self.query_decomposition.decompose(q)
             queries.extend(qs)
-            logging.info(f'Query Decomposition: {q} -> {qs}')
+            print(f'--> Fused Query {idx + 1}: {q}')
+            for qd in qs:
+                print(f'----> Decomposed Query: {qd}')
         return queries
 
     def query(self, query: str) -> list:
@@ -52,16 +57,16 @@ class RAGClient:
     
     def context_augment(self, query: str) -> str:
         # Aggregate queries and hits
-        print(f'Original Query: {query}')
         rewritten_queries = self.rewrite(query)
-        print(f'Rewritten Queries: {rewritten_queries}')
+
         aggregated_hits = []
         for rewritten_query in rewritten_queries:
             hits = self.query(rewritten_query)
             hits = self.rerank(rewritten_query, hits)
             logging.info(f'Reranked Hits: {hits[:3]}')
             aggregated_hits.extend(hits[:3])
-        return self.aggregate.aggregate(query, aggregated_hits[:3])
+        aggregated_hits = self.rerank(rewritten_queries, aggregated_hits)
+        return self.aggregate.aggregate(query, aggregated_hits[:10])
     
     def answer(self, query: str) -> str:
         # Context Augment

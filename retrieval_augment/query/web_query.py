@@ -15,10 +15,9 @@ class WebQuery:
     def query(self, query: str, key: str = None) -> str:
         if key is None:
             key = self.key
-
         if not self.use_web:
             return []
-            
+        print(f'Search for query in web: {query}')
         url = "https://api.bochaai.com/v1/web-search"
 
         payload = json.dumps({

@@ -55,6 +55,7 @@ class ESQuery:
 
     def search(self, query: str, es_client: ElasticSearchClient):
         # Search by keyword and vector
+        print(f'Search for query in database: {query}')
         keyword_hits = self.keyword_search(query, es_client)
         vector_hits = self.vector_search(query, es_client)
         return self.rrf(keyword_hits, vector_hits)
